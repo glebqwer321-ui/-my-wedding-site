@@ -799,12 +799,12 @@
                         
                         <!-- ПРЯМОУГОЛЬНИКИ ДЛЯ КАРТИНОК -->
                         <div class="dresscode-colors">
-                            <div class="color-rect" style="background: url('images/1.jpg'); background-size: cover; background-position: center;"></div>
-                            <div class="color-rect" style="background: url('images/2.jpg'); background-size: cover; background-position: center;"></div>
-                            <div class="color-rect" style="background: url('images/33.jpg'); background-size: cover; background-position: center;"></div>
-                            <div class="color-rect" style="background: url('images/3.jpg'); background-size: cover; background-position: center;"></div>
-                            <div class="color-rect" style="background: url('images/5.jpg'); background-size: cover; background-position: center;"></div>
-                            <div class="color-rect" style="background: url('images/6.jpg'); background-size: cover; background-position: center;"></div>
+                            <div class="color-rect" style="background: url('images/1.png'); background-size: cover; background-position: center;"></div>
+                            <div class="color-rect" style="background: url('images/2.png'); background-size: cover; background-position: center;"></div>
+                            <div class="color-rect" style="background: url('images/33.png'); background-size: cover; background-position: center;"></div>
+                            <div class="color-rect" style="background: url('images/3.png'); background-size: cover; background-position: center;"></div>
+                            <div class="color-rect" style="background: url('images/5.png'); background-size: cover; background-position: center;"></div>
+                            <div class="color-rect" style="background: url('images/6.png'); background-size: cover; background-position: center;"></div>
                         </div>
                         
                         <p style="font-size: 16px; color: #a86f6f; margin-top: 15px;">Пожалуйста, воздержитесь от белого цвета</p>
@@ -881,7 +881,7 @@
                     <div class="contact-name">КСЕНИЯ</div>
                     <a href="tel:+79159443597" class="contact-phone">+7 (915) 944-35-97</a>
                 </div>
-                <div class="contact-note animate-text">WhatsApp, Telegram, MAX, звонки</div>
+                <div class="contact-note animate-text">WhatsApp, Telegram, ,MAX звонки</div>
             </div>
         </div>
     </section>
@@ -944,48 +944,50 @@
         updateTimer();
         setInterval(updateTimer, 1000);
 
+        // ИСПРАВЛЕННЫЙ КАЛЕНДАРЬ — 21 августа 2026, пятница
         function generateCalendar() {
-    const year = 2026, month = 7, weddingDay = 21;
-    const firstDayOfMonth = new Date(year, month, 1);
-    let startWeekday = firstDayOfMonth.getDay(); // 0 = воскресенье
-    
-    const daysInMonth = new Date(year, month + 1, 0).getDate();
-    const weekdays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']; // Понедельник — первый день
-    
-    const grid = document.getElementById('calendar');
-    grid.innerHTML = '';
-    
-    // Добавляем названия дней недели
-    weekdays.forEach(day => {
-        const el = document.createElement('div');
-        el.className = 'weekday';
-        el.textContent = day;
-        grid.appendChild(el);
-    });
-    
-    // Корректировка: сколько пустых ячеек в начале
-    let emptyCells = startWeekday === 0 ? 6 : startWeekday - 1;
-    
-    for (let i = 0; i < emptyCells; i++) {
-        const emptyCell = document.createElement('div');
-        emptyCell.className = 'calendar-day';
-        emptyCell.textContent = '';
-        grid.appendChild(emptyCell);
-    }
-    
-    // Заполняем дни месяца
-    for (let day = 1; day <= daysInMonth; day++) {
-        const dayElement = document.createElement('div');
-        dayElement.className = 'calendar-day';
-        dayElement.textContent = day;
-        
-        if (day === weddingDay) {
-            dayElement.classList.add('highlight');
+            const year = 2026, month = 7, weddingDay = 21;
+            const firstDayOfMonth = new Date(year, month, 1);
+            let startWeekday = firstDayOfMonth.getDay(); // 0 = воскресенье
+            
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const weekdays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']; // Понедельник — первый день
+            
+            const grid = document.getElementById('calendar');
+            grid.innerHTML = '';
+            
+            // Добавляем названия дней недели
+            weekdays.forEach(day => {
+                const el = document.createElement('div');
+                el.className = 'weekday';
+                el.textContent = day;
+                grid.appendChild(el);
+            });
+            
+            // Корректировка: сколько пустых ячеек в начале
+            let emptyCells = startWeekday === 0 ? 6 : startWeekday - 1;
+            
+            for (let i = 0; i < emptyCells; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'calendar-day';
+                emptyCell.textContent = '';
+                grid.appendChild(emptyCell);
+            }
+            
+            // Заполняем дни месяца
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                
+                if (day === weddingDay) {
+                    dayElement.classList.add('highlight');
+                }
+                
+                grid.appendChild(dayElement);
+            }
         }
-        
-        grid.appendChild(dayElement);
-    }
-}
+        generateCalendar();
 
         const radios = document.querySelectorAll('input[name="attending"]');
         const drinksSection = document.getElementById('drinksSection');
