@@ -945,19 +945,47 @@
         setInterval(updateTimer, 1000);
 
         function generateCalendar() {
-            const year = 2026, month = 7, weddingDay = 21;
-            const firstDay = new Date(year, month, 1);
-            let startWeekday = firstDay.getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            const weekdays = ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'];
-            const grid = document.getElementById('calendar');
-            grid.innerHTML = '';
-            weekdays.forEach(day => { const el = document.createElement('div'); el.className = 'weekday'; el.textContent = day; grid.appendChild(el); });
-            let emptyCells = startWeekday === 0 ? 6 : startWeekday - 1;
-            for (let i = 0; i < emptyCells; i++) { const el = document.createElement('div'); el.className = 'calendar-day'; el.textContent = ''; grid.appendChild(el); }
-            for (let day = 1; day <= daysInMonth; day++) { const el = document.createElement('div'); el.className = 'calendar-day'; el.textContent = day; if (day === weddingDay) el.classList.add('highlight'); grid.appendChild(el); }
+    const year = 2026, month = 7, weddingDay = 21;
+    const firstDayOfMonth = new Date(year, month, 1);
+    let startWeekday = firstDayOfMonth.getDay(); // 0 = воскресенье
+    
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const weekdays = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс']; // Понедельник — первый день
+    
+    const grid = document.getElementById('calendar');
+    grid.innerHTML = '';
+    
+    // Добавляем названия дней недели
+    weekdays.forEach(day => {
+        const el = document.createElement('div');
+        el.className = 'weekday';
+        el.textContent = day;
+        grid.appendChild(el);
+    });
+    
+    // Корректировка: сколько пустых ячеек в начале
+    let emptyCells = startWeekday === 0 ? 6 : startWeekday - 1;
+    
+    for (let i = 0; i < emptyCells; i++) {
+        const emptyCell = document.createElement('div');
+        emptyCell.className = 'calendar-day';
+        emptyCell.textContent = '';
+        grid.appendChild(emptyCell);
+    }
+    
+    // Заполняем дни месяца
+    for (let day = 1; day <= daysInMonth; day++) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'calendar-day';
+        dayElement.textContent = day;
+        
+        if (day === weddingDay) {
+            dayElement.classList.add('highlight');
         }
-        generateCalendar();
+        
+        grid.appendChild(dayElement);
+    }
+}
 
         const radios = document.querySelectorAll('input[name="attending"]');
         const drinksSection = document.getElementById('drinksSection');
